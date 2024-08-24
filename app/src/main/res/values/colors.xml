@@ -2,4 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="heliotrope1">#A16CFF</color>
+    <color name="heliotrope2">#C26EFF</color>
 </resources>

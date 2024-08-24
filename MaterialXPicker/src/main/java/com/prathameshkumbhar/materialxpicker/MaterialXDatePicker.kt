@@ -8,8 +8,6 @@ import com.google.android.material.datepicker.MaterialDatePicker
 
 class MaterialXDatePicker{
 
-
-
     fun showMaterialXDatePicker(
         lifecycleOwner: LifecycleOwner,
         isCancelable: Boolean,
