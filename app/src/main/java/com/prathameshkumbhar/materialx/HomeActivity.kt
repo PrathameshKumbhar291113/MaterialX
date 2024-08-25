@@ -11,6 +11,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        window.statusBarColor = resources.getColor(R.color.heliotrope1)
 
 
     }
