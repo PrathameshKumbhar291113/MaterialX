@@ -40,7 +40,7 @@ publishing {
                 from components.release
                 groupId = 'com.github.PrathameshKumbhar291113'
                 artifactId = 'MaterialX'
-                version = '1.0.3'
+                version = '1.0.4'
                 pom {
                     licenses {
                         license {
