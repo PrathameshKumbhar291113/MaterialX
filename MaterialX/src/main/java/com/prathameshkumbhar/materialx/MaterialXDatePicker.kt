@@ -1,4 +1,4 @@
-package com.prathameshkumbhar.materialxpicker
+package com.prathameshkumbhar.materialx
 
 /*
  * Copyright 2024 Prathamesh Kumbhar

@@ -49,5 +49,5 @@ dependencies {
     androidTestImplementation libs.androidx.espresso.core
 
     //Including material x library
-    implementation 'com.github.PrathameshKumbhar291113:MaterialX:1.0.0'
+    implementation libs.materialx
 }
