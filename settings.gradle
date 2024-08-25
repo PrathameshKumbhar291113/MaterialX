@@ -22,4 +22,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "MaterialX"
 include ':app'
-//include ':MaterialXPicker'
+include ':MaterialXPicker'
