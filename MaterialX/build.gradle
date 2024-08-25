@@ -38,6 +38,9 @@ publishing {
         release(MavenPublication) {
             afterEvaluate {
                 from components.release
+                groupId = 'com.github.PrathameshKumbhar291113'
+                artifactId = 'MaterialX'
+                version = '1.0.3'
                 pom {
                     licenses {
                         license {
