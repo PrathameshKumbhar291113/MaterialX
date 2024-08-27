@@ -164,7 +164,7 @@ Material X lets you create highly customizable dialog boxes. Here’s how:
 ```kotlin
 import com.github.prathameshkumbhar.materialx.MaterialXCustomDialogBuilder
 
-val customDialog = MaterialXCustomDialogBuilder(context)
+val customDialog = MaterialXCustomDialogs.MaterialXCustomDialogBuilder(context = this)
     .setTitle("Welcome")
     .setDescription("Thank you for choosing MaterialX. Enjoy your experience!")
     .setPositiveButton("OK") { 
@@ -181,7 +181,7 @@ customDialog.show()
 ```kotlin
 import com.github.prathameshkumbhar.materialx.MaterialXCustomDialogBuilder
 
-val customDialog = MaterialXCustomDialogBuilder(context)
+val customDialog = MaterialXCustomDialogs.MaterialXCustomDialogBuilder(context = this)
     .setTitle("Custom Dialog")
     .setDescription("This is a dialog with a custom background and font.")
     .setPositiveButton("Accept")
@@ -199,7 +199,7 @@ customDialog.show()
 ```kotlin
 import com.github.prathameshkumbhar.materialx.MaterialXCustomDialogBuilder
 
-val customDialog = MaterialXCustomDialogBuilder(context)
+val customDialog = MaterialXCustomDialogs.MaterialXCustomDialogBuilder(context = this)
     .setImageDrawable(ContextCompat.getDrawable(context, R.drawable.dialog_image))
     .setTitle("Image Dialog")
     .setDescription("This dialog has an image above the title.")
@@ -214,7 +214,7 @@ customDialog.show()
 ```kotlin
 import com.github.prathameshkumbhar.materialx.MaterialXCustomDialogBuilder
 
-val customDialog = MaterialXCustomDialogBuilder(context)
+val customDialog = MaterialXCustomDialogs.MaterialXCustomDialogBuilder(context = this)
     .setTitle("Styled Dialog")
     .setDescription("This dialog has a gradient button background and rounded corners.")
     .setPositiveButton("Agree")
