@@ -30,4 +30,24 @@
         <item name="cornerSize">16dp</item>
     </style>
 
+
+    <style name="ThemeMaterialTimePicker" parent="ThemeOverlay.MaterialComponents.TimePicker">
+        <item name="colorPrimary">@color/heliotrope1</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="materialTimePickerTheme">@style/ThemeOverlay.App.TimePicker</item>
+    </style>
+
+
+    <style name="ThemeOverlay.App.TimePicker" parent="ThemeOverlay.MaterialComponents.TimePicker">
+        <item name="clockFaceBackgroundColor">@color/white</item>
+        <item name="clockHandColor">@color/heliotrope1</item>
+        <item name="clockNumberTextColor">@color/heliotrope1</item>
+        <item name="chipStyle">@style/Widget.App.Chip</item>
+    </style>
+
+
+    <style name="Widget.App.Chip" parent="Widget.MaterialComponents.TimePicker.Display">
+        <item name="android:textColor">@color/heliotrope1</item>
+    </style>
+
 </resources>

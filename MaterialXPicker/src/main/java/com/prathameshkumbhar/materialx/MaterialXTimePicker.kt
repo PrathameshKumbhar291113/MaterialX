@@ -20,18 +20,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 
 class MaterialXTimePicker {
 
     fun showMaterialXTimePicker(
         lifecycleOwner: LifecycleOwner,
         isCancelable: Boolean,
+        is24HourFormat: Boolean = false, // Add this parameter for time format selection
         onTimeSelected: (Int, Int) -> Unit,
         onError: (String) -> Unit = {},
         customizations: (MaterialTimePicker.Builder) -> Unit = {}
     ) {
         try {
-
             val fragmentManager = when (lifecycleOwner) {
                 is FragmentActivity -> lifecycleOwner.supportFragmentManager
                 is Fragment -> lifecycleOwner.childFragmentManager
@@ -39,7 +40,9 @@ class MaterialXTimePicker {
             }
 
             val builder = MaterialTimePicker.Builder()
+                .setTimeFormat(if (is24HourFormat) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H) // Set time format
             customizations(builder)
+
             val picker = builder.build()
             picker.isCancelable = isCancelable
 
