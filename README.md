@@ -60,108 +60,99 @@ Material X is available via [JitPack](https://jitpack.io/). To include it in you
 
 Material X provides an easy-to-use date picker. Here’s how you can use it:
 
-#### Basic Date Picker
+#### Material X Date Picker
 
 ```kotlin
 import com.prathameshkumbhar.materialx.MaterialXDatePicker
 
 MaterialXDatePicker().showMaterialXDatePicker(
-    context = this,
-    initialDate = LocalDate.now(),
-    onDateSelected = { selectedDate ->
-        // Handle the selected date
-        Log.d("DatePicker", "Selected date: $selectedDate")
-    }
-)
-```
-
-#### Date Picker with Custom Initial Date
-
-```kotlin
-import com.prathameshkumbhar.materialx.MaterialXDatePicker
-
-MaterialXDatePicker().showMaterialXDatePicker(
-    context = this,
-    initialDate = LocalDate.of(2023, 12, 25),
-    onDateSelected = { selectedDate ->
-        // Handle the selected date
-        Log.d("DatePicker", "Selected date: $selectedDate")
-    }
-)
+                lifecycleOwner = this,
+                isCancelable = true,
+                onDateSelected = { selectedDate ->
+                    // Handle the selected date
+                    Log.d("DatePicker", "Selected date: $selectedDate")
+                    Toast.makeText(this,
+                        "Date Selected: $selectedDate",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                },
+                onError = { error ->
+                    Toast.makeText(this,
+                        "Error Occurred: $error",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                },
+                customizations = { customization ->
+                    customization.setTheme(R.style.ThemeMaterialCalendar)
+                }
+            )
 ```
 
 ### 2. Material Date Range Picker
 
 Material X allows users to select a range of dates easily:
 
-#### Basic Date Range Picker
+#### Material X Date Range Picker
 
 ```kotlin
 import com.prathameshkumbhar.materialx.MaterialXDateRangePicker
 
-MaterialXDateRangePicker().showMaterialXDateRangePicker(
-    context = this,
-    initialStartDate = LocalDate.now(),
-    initialEndDate = LocalDate.now().plusDays(7),
-    onDateRangeSelected = { startDate, endDate ->
-        // Handle the selected date range
-        Log.d("DateRangePicker", "Selected range: $startDate to $endDate")
-    }
-)
-```
-
-#### Date Range Picker with Custom Range
-
-```kotlin
-import com.prathameshkumbhar.materialx.MaterialXDateRangePicker
-
-MaterialXDateRangePicker().showMaterialXDateRangePicker(
-    context = this,
-    initialStartDate = LocalDate.of(2023, 1, 1),
-    initialEndDate = LocalDate.of(2023, 12, 31),
-    onDateRangeSelected = { startDate, endDate ->
-        // Handle the selected date range
-        Log.d("DateRangePicker", "Selected range: $startDate to $endDate")
-    }
-)
+  MaterialXDateRangePicker().showMaterialXDateRangePicker(
+                lifecycleOwner = this,
+                isCancelable = true,
+                onDateRangeSelected = { selectedDateRange ->
+                    // Handle the selected date range
+                    Log.d("DatePicker",
+                        "Selected first date: ${selectedDateRange.first} --- second date: ${selectedDateRange.second}"
+                    )
+                    Toast.makeText(this,
+                        "Selected first date: ${selectedDateRange.first} --- second date: ${selectedDateRange.second}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                },
+                onError = { error ->
+                    Toast.makeText(this, 
+                        "Error Occurred: $error", 
+                        Toast.LENGTH_SHORT
+                    ).show()
+                },
+                customizations = { customization ->
+                    customization.setTheme(R.style.ThemeMaterialCalendar)
+                }
+            )
 ```
 
 ### 3. Material Time Picker
 
 Integrate a Material-styled time picker into your app:
 
-#### Basic Time Picker
+#### Material X Time Picker
 
 ```kotlin
 import com.prathameshkumbhar.materialx.MaterialXTimePicker
 
 MaterialXTimePicker().showMaterialXTimePicker(
-    context = this,
-    initialHour = 10,
-    initialMinute = 30,
-    is24HourView = true,
-    onTimeSelected = { hourOfDay, minute ->
-        // Handle the selected time
-        Log.d("TimePicker", "Selected time: $hourOfDay:$minute")
-    }
-)
-```
-
-#### Time Picker with Custom Initial Time
-
-```kotlin
-import com.prathameshkumbhar.materialx.MaterialXTimePicker
-
-MaterialXTimePicker().showMaterialXTimePicker(
-    context = this,
-    initialHour = 14,
-    initialMinute = 45,
-    is24HourView = false,
-    onTimeSelected = { hourOfDay, minute ->
-        // Handle the selected time in 12-hour format
-        Log.d("TimePicker", "Selected time: $hourOfDay:$minute")
-    }
-)
+                lifecycleOwner = this,
+                isCancelable = true,
+                is24HourFormat = false,
+                onTimeSelected = { hour, minute->
+                    // Handle the selected time
+                    Log.d("DatePicker", "Selected Time  H: $hour  M: $minute")
+                    Toast.makeText(this,
+                        "Selected Time  H: $hour  M: $minute",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                },
+                onError = { error ->
+                    Toast.makeText(this,
+                        "Error Occurred: $error",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                },
+                customizations = { customization ->
+                    customization.setTheme(R.style.ThemeMaterialTimePicker)
+                }
+            )
 ```
 
 ### 4. Custom Dialog Box
