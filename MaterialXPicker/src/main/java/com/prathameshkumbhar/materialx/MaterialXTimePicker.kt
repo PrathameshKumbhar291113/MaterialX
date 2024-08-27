@@ -27,7 +27,7 @@ class MaterialXTimePicker {
     fun showMaterialXTimePicker(
         lifecycleOwner: LifecycleOwner,
         isCancelable: Boolean,
-        is24HourFormat: Boolean = false, // Add this parameter for time format selection
+        is24HourFormat: Boolean = false,
         onTimeSelected: (Int, Int) -> Unit,
         onError: (String) -> Unit = {},
         customizations: (MaterialTimePicker.Builder) -> Unit = {}
@@ -40,7 +40,7 @@ class MaterialXTimePicker {
             }
 
             val builder = MaterialTimePicker.Builder()
-                .setTimeFormat(if (is24HourFormat) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H) // Set time format
+                .setTimeFormat(if (is24HourFormat) TimeFormat.CLOCK_24H else TimeFormat.CLOCK_12H)
             customizations(builder)
 
             val picker = builder.build()
