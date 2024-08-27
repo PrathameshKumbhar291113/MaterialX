@@ -24,6 +24,9 @@ class HomeActivity : AppCompatActivity() {
         //Material X Time Picker
         materialXTimePicker()
 
+        //Material X Custom Dialog Box
+        materialXCustomDialogBox()
+
     }
 
     private fun materialXDatePicker() {
@@ -36,10 +39,16 @@ class HomeActivity : AppCompatActivity() {
                 onDateSelected = { selectedDate ->
                     // Handle the selected date
                     Log.d("DatePicker", "Selected date: $selectedDate")
-                    Toast.makeText(this, "Date Selected: $selectedDate", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,
+                        "Date Selected: $selectedDate",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 },
                 onError = { error ->
-                    Toast.makeText(this, "Error Occurred: $error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,
+                        "Error Occurred: $error",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 },
                 customizations = { customization ->
                     customization.setTheme(R.style.ThemeMaterialCalendar)
@@ -58,12 +67,20 @@ class HomeActivity : AppCompatActivity() {
                 lifecycleOwner = this,
                 isCancelable = true,
                 onDateRangeSelected = { selectedDateRange ->
-                    // Handle the selected date
-                    Log.d("DatePicker", "Selected first date: ${selectedDateRange.first} --- second date: ${selectedDateRange.second}")
-                    Toast.makeText(this, "Selected first date: ${selectedDateRange.first} --- second date: ${selectedDateRange.second}", Toast.LENGTH_SHORT).show()
+                    // Handle the selected date range
+                    Log.d("DatePicker",
+                        "Selected first date: ${selectedDateRange.first} --- second date: ${selectedDateRange.second}"
+                    )
+                    Toast.makeText(this,
+                        "Selected first date: ${selectedDateRange.first} --- second date: ${selectedDateRange.second}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 },
                 onError = { error ->
-                    Toast.makeText(this, "Error Occurred: $error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,
+                        "Error Occurred: $error",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 },
                 customizations = { customization ->
                     customization.setTheme(R.style.ThemeMaterialCalendar)
@@ -80,13 +97,20 @@ class HomeActivity : AppCompatActivity() {
             MaterialXTimePicker().showMaterialXTimePicker(
                 lifecycleOwner = this,
                 isCancelable = true,
+                is24HourFormat = false,
                 onTimeSelected = { hour, minute->
-                    // Handle the selected date
+                    // Handle the selected time
                     Log.d("DatePicker", "Selected Time  H: $hour  M: $minute")
-                    Toast.makeText(this, "Selected Time  H: $hour  M: $minute", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,
+                        "Selected Time  H: $hour  M: $minute",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 },
                 onError = { error ->
-                    Toast.makeText(this, "Error Occurred: $error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,
+                        "Error Occurred: $error",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 },
                 customizations = { customization ->
                     customization.setTheme(R.style.ThemeMaterialTimePicker)
@@ -98,23 +122,18 @@ class HomeActivity : AppCompatActivity() {
 
     private fun materialXCustomDialogBox() {
 
-        binding.cardDatePicker.setOnClickListener {
+        binding.cardAlertDialogBox.setOnClickListener {
 
-            MaterialXDatePicker().showMaterialXDatePicker(
-                lifecycleOwner = this,
-                isCancelable = true,
-                onDateSelected = { selectedDate ->
-                    // Handle the selected date
-                    Log.d("DatePicker", "Selected date: $selectedDate")
-                    Toast.makeText(this, "Date Selected: $selectedDate", Toast.LENGTH_SHORT).show()
-                },
-                onError = { error ->
-                    Toast.makeText(this, "Error Occurred: $error", Toast.LENGTH_SHORT).show()
-                },
-                customizations = { customization ->
-                    customization.setTheme(R.style.ThemeMaterialCalendar)
+            val customDialog = MaterialXCustomDialogs.MaterialXCustomDialogBuilder(context = this)
+                .setTitle("Welcome")
+                .setDescription("Thank you for choosing MaterialX. Enjoy your experience!")
+                .setPositiveButton("OK") {
+                    // Positive button action
                 }
-            )
+                .setCancelable(true)
+                .build()
+
+            customDialog.show()
         }
 
     }
