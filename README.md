@@ -4,7 +4,7 @@
 [![Version](https://img.shields.io/badge/version-1.0.3-green.svg)](https://github.com/PrathameshKumbhar291113/MaterialX/releases)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://jitpack.io/#PrathameshKumbhar291113/MaterialX)
 
-**MaterialX** is an Android library that simplifies the creation of customizable Material Design components, such as dialog boxes, time pickers, date pickers, and date range pickers. The library is designed to be highly flexible, allowing you to tailor its components to fit the specific needs of your application.
+**Material X** is an Android library that simplifies the creation of customizable Material Design components, such as dialog boxes, time pickers, date pickers, and date range pickers. The library is designed to be highly flexible, allowing you to tailor its components to fit the specific needs of your application.
 
 ## Features
 
@@ -33,7 +33,7 @@
 
 ### Installation
 
-MaterialX is available via [JitPack](https://jitpack.io/). To include it in your project:
+Material X is available via [JitPack](https://jitpack.io/). To include it in your project:
 
 1. Add the JitPack repository to your root `build.gradle` file:
 
@@ -58,14 +58,14 @@ MaterialX is available via [JitPack](https://jitpack.io/). To include it in your
 
 ### 1. Material Date Picker
 
-MaterialX provides an easy-to-use date picker. Here’s how you can use it:
+Material X provides an easy-to-use date picker. Here’s how you can use it:
 
 #### Basic Date Picker
 
 ```kotlin
-import com.github.prathameshkumbhar.materialx.DatePicker
+import com.prathameshkumbhar.materialx.MaterialXDatePicker
 
-DatePicker.show(
+MaterialXDatePicker().showMaterialXDatePicker(
     context = this,
     initialDate = LocalDate.now(),
     onDateSelected = { selectedDate ->
@@ -78,9 +78,9 @@ DatePicker.show(
 #### Date Picker with Custom Initial Date
 
 ```kotlin
-import com.github.prathameshkumbhar.materialx.DatePicker
+import com.prathameshkumbhar.materialx.MaterialXDatePicker
 
-DatePicker.show(
+MaterialXDatePicker().showMaterialXDatePicker(
     context = this,
     initialDate = LocalDate.of(2023, 12, 25),
     onDateSelected = { selectedDate ->
@@ -92,14 +92,14 @@ DatePicker.show(
 
 ### 2. Material Date Range Picker
 
-MaterialX allows users to select a range of dates easily:
+Material X allows users to select a range of dates easily:
 
 #### Basic Date Range Picker
 
 ```kotlin
-import com.github.prathameshkumbhar.materialx.DateRangePicker
+import com.prathameshkumbhar.materialx.MaterialXDateRangePicker
 
-DateRangePicker.show(
+MaterialXDateRangePicker().showMaterialXDateRangePicker(
     context = this,
     initialStartDate = LocalDate.now(),
     initialEndDate = LocalDate.now().plusDays(7),
@@ -113,9 +113,9 @@ DateRangePicker.show(
 #### Date Range Picker with Custom Range
 
 ```kotlin
-import com.github.prathameshkumbhar.materialx.DateRangePicker
+import com.prathameshkumbhar.materialx.MaterialXDateRangePicker
 
-DateRangePicker.show(
+MaterialXDateRangePicker().showMaterialXDateRangePicker(
     context = this,
     initialStartDate = LocalDate.of(2023, 1, 1),
     initialEndDate = LocalDate.of(2023, 12, 31),
@@ -133,9 +133,9 @@ Integrate a Material-styled time picker into your app:
 #### Basic Time Picker
 
 ```kotlin
-import com.github.prathameshkumbhar.materialx.TimePicker
+import com.prathameshkumbhar.materialx.MaterialXTimePicker
 
-TimePicker.show(
+MaterialXTimePicker().showMaterialXTimePicker(
     context = this,
     initialHour = 10,
     initialMinute = 30,
@@ -150,9 +150,9 @@ TimePicker.show(
 #### Time Picker with Custom Initial Time
 
 ```kotlin
-import com.github.prathameshkumbhar.materialx.TimePicker
+import com.prathameshkumbhar.materialx.MaterialXTimePicker
 
-TimePicker.show(
+MaterialXTimePicker().showMaterialXTimePicker(
     context = this,
     initialHour = 14,
     initialMinute = 45,
@@ -166,7 +166,7 @@ TimePicker.show(
 
 ### 4. Custom Dialog Box
 
-MaterialX lets you create highly customizable dialog boxes. Here’s how:
+Material X lets you create highly customizable dialog boxes. Here’s how:
 
 #### Basic Dialog with Title and Description
 
@@ -237,7 +237,7 @@ customDialog.show()
 
 ## Customization Options
 
-MaterialX provides a broad range of customization options:
+Material X provides a broad range of customization options:
 
 - **Background**:
   - Set a solid color: `.setBackgroundColor(ContextCompat.getColor(context, R.color.backgroundColor))`
@@ -265,15 +265,13 @@ Contributions are welcome! Here's how you can contribute:
 2. **Create a Branch**: Use `git checkout -b feature/YourFeatureName` to create a new branch.
 3. **Commit Your Changes**: Make your changes and use `git commit -m 'Add some feature'` to commit your changes.
 4. **Push to the Branch**: Use `git push origin feature/YourFeatureName` to push your changes to the branch.
-5
-
-. **Open a Pull Request**: Open a pull request on GitHub and describe your changes.
+5. **Open a Pull Request**: Open a pull request on GitHub and describe your changes.
 
 Please ensure your code adheres to the project's coding standards and passes all tests.
 
 ## License
 
-MaterialX is licensed under the Apache License, Version 2.0. You can view the full license [here](LICENSE).
+Material X is licensed under the Apache License, Version 2.0. You can view the full license [here](LICENSE).
 
 ## Acknowledgments
 
@@ -289,4 +287,4 @@ For questions, feedback, or contributions, feel free to reach out via GitHub iss
 Thank you for using MaterialX! If you find this library helpful, please consider starring the repository and sharing it with others.
 ```
 
-This `README.md` includes detailed instructions for using each feature of the `MaterialX` library, with code snippets and customization options for the Date Picker, Date Range Picker, Time Picker, and Customizable Dialog Box.
+This `README.md` includes detailed instructions for using each feature of the `Material X` library, with code snippets and customization options for the Date Picker, Date Range Picker, Time Picker, and Customizable Dialog Box.
