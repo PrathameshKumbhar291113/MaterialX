@@ -1,7 +1,9 @@
+<img src="https://github.com/user-attachments/assets/ddeb2384-622b-4ada-8d3e-d1e8a1f5d6e6" alt="Material X Logo" width="250" height="300">
+
 # Material X
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Version](https://img.shields.io/badge/version-1.0.3-green.svg)](https://github.com/PrathameshKumbhar291113/MaterialX/releases)
+[![Version](https://img.shields.io/badge/version-1.0.4-green.svg)](https://github.com/PrathameshKumbhar291113/MaterialX/releases)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://jitpack.io/#PrathameshKumbhar291113/MaterialX)
 
 **Material X** is an Android library that simplifies the creation of customizable Material Design components, such as dialog boxes, time pickers, date pickers, and date range pickers. The library is designed to be highly flexible, allowing you to tailor its components to fit the specific needs of your application.
@@ -50,7 +52,7 @@ Material X is available via [JitPack](https://jitpack.io/). To include it in you
 
     ```groovy
     dependencies {
-        implementation 'com.github.PrathameshKumbhar291113:MaterialX:1.0.3'
+        implementation 'com.github.PrathameshKumbhar291113:MaterialX:1.0.4'
     }
     ```
 
@@ -247,6 +249,14 @@ Material X provides a broad range of customization options:
 
 - **Padding**:
   - Customize padding around the dialog content: `.setPadding(16, 16, 16, 16)`
+
+## Screen Shots Of Demo App.
+
+<img src="https://github.com/user-attachments/assets/467857dc-1d52-4fd4-a70f-91fa6b48908d" alt="Material X Logo" width="214" height="463">  <img src="https://github.com/user-attachments/assets/3365e14d-8f5a-4344-804b-c3d2686c625e" alt="Material X Logo" width="214" height="463">  <img src="https://github.com/user-attachments/assets/337abdb8-a7f6-4b60-94f7-14847d217c97" alt="Material X Logo" width="214" height="463"> 
+
+<img src="https://github.com/user-attachments/assets/0b3509e6-cf62-4fdf-9d3b-b0920aa4a26a" alt="Material X Logo" width="214" height="463"> <img src="https://github.com/user-attachments/assets/45bb6cf8-3b09-4b17-94a0-85bb51ca9e03" alt="Material X Logo" width="214" height="463"> <img src="https://github.com/user-attachments/assets/2717a15d-bf83-4233-bf11-61628d8cbe41" alt="Material X Logo" width="214" height="463">
+
+
 
 ## Contributing
 
