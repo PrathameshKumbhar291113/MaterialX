@@ -38,7 +38,7 @@ fun MaterialXJPCTimePicker(
 
         customizations(builder)
 
-        val picker = builder.build()`
+        val picker = builder.build()
 
         picker.isCancelable = isCancelable
 
