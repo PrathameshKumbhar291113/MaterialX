@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.prathameshkumbhar.materialx.databinding.ActivitySplashBinding
 import kotlinx.coroutines.delay
@@ -14,8 +15,8 @@ class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySplashBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = DataBindingUtil.setContentView(this@SplashActivity, R.layout.activity_splash)
+
         window.statusBarColor = resources.getColor(R.color.heliotrope1)
         navigateToHome()
 

@@ -1,5 +1,7 @@
 [versions]
 agp = "8.5.0"
+databinding-compiler-version = "3.1.4"
+databindingRuntime = "8.6.0"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -10,13 +12,14 @@ material = "1.12.0"
 activity = "1.9.1"
 constraintlayout = "2.1.4"
 materialx = "1.0.4"
-composeBom = "2024.09.03"
+composeBom = "2024.09.00"
 composeCompiler = "1.5.15"
 composeUi = "1.6.8"
 composeMaterial3 = "1.2.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-databinding-runtime = { module = "androidx.databinding:databinding-runtime", version.ref = "databindingRuntime" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

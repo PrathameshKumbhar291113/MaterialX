@@ -1,9 +1,11 @@
 package com.prathameshkumbhar.materialx
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.prathameshkumbhar.materialx.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
@@ -11,8 +13,8 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = DataBindingUtil.setContentView(this@HomeActivity, R.layout.activity_home)
+
         window.statusBarColor = resources.getColor(R.color.heliotrope1)
 
         //Material X Date Picker
@@ -27,6 +29,16 @@ class HomeActivity : AppCompatActivity() {
         //Material X Custom Dialog Box
         materialXCustomDialogBox()
 
+        //Goto compose activity
+        gotoComposeActivity()
+
+    }
+
+    private fun gotoComposeActivity() {
+       binding.cardComposeBox.setOnClickListener {
+           val intent = Intent(this, JPCActivity::class.java)
+           startActivity(intent)
+       }
     }
 
     private fun materialXDatePicker() {

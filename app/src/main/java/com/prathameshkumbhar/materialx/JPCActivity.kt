@@ -2,13 +2,201 @@ package com.prathameshkumbhar.materialx
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.core.app.ComponentActivity
+import androidx.activity.ComponentActivity
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
+import androidx.databinding.DataBindingUtil
+import com.prathameshkumbhar.materialx.databinding.ActivityJpcBinding
+import com.prathameshkumbhar.materialx.ui.theme.MaterialXJPCTheme
+
 
 @SuppressLint("RestrictedApi")
 class JPCActivity(): ComponentActivity() {
+    private lateinit var binding: ActivityJpcBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
+        binding = DataBindingUtil.setContentView(this@JPCActivity, R.layout.activity_jpc)
 
+        binding.composeView.setContent {
+            MaterialXJPCTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.onBackground
+                ) {
+
+                }
+            }
         }
+    }
 }
+
+/*
+@Composable
+fun TiltResponsiveScreenWithCollisions() {
+    val context = LocalContext.current
+    val sensorHandler = remember { SensorHandler(context) }
+
+    // State for component positions
+    var positions by remember {
+        mutableStateOf(
+            listOf(
+                PointF(100f, 100f),
+                PointF(300f, 300f),
+                PointF(500f, 500f),
+                PointF(700f, 700f)
+            )
+        )
+    }
+    var velocities by remember { mutableStateOf(List(positions.size) { PointF(0f, 0f) }) }
+
+    val displayMetrics = LocalContext.current.resources.displayMetrics
+    val screenWidth = displayMetrics.widthPixels / displayMetrics.density
+    val screenHeight = displayMetrics.heightPixels / displayMetrics.density
+
+    DisposableEffect(Unit) {
+        sensorHandler.onSensorChanged = { x, y ->
+            velocities = velocities.map { velocity ->
+                PointF(
+                    (velocity.x - x * 0.05f).coerceIn(-5f, 5f),
+                    (velocity.y + y * 0.05f).coerceIn(-5f, 5f)
+                )
+            }
+        }
+        sensorHandler.startListening()
+        onDispose {
+            sensorHandler.stopListening()
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        while (true) {
+            withFrameMillis {
+                val updatedPositions = positions.mapIndexed { index, pos ->
+                    val newX = (pos.x + velocities[index].x).coerceIn(0f, screenWidth - 100f)
+                    val newY = (pos.y + velocities[index].y).coerceIn(0f, screenHeight - 100f)
+                    PointF(newX, newY)
+                }
+
+                val (resolvedPositions, resolvedVelocities) = resolveCollisionsAndAdjustVelocities(
+                    updatedPositions,
+                    velocities,
+                    screenWidth,
+                    screenHeight
+                )
+
+                positions = resolvedPositions
+                velocities = resolvedVelocities
+            }
+        }
+    }
+
+    Box(modifier = Modifier.fillMaxSize()) {
+        positions.forEachIndexed { index, pos ->
+            TiltResponsiveComponent(
+                modifier = Modifier
+                    .offset(x = pos.x.dp, y = pos.y.dp)
+                    .size(100.dp)
+                    .border(2.dp, Color.Black),
+                index = index
+            )
+        }
+    }
+}
+
+@Composable
+fun TiltResponsiveComponent(modifier: Modifier, index: Int) {
+    Box(
+        modifier = modifier
+            .background(Color.White)
+            .padding(16.dp)
+    ) {
+        when (index) {
+            0 -> CardContent("Material X Date Picker", R.drawable.calendar)
+            1 -> CardContent("Material X Date Range Picker", R.drawable.date_range)
+            2 -> CardContent("Material X Time Picker", R.drawable.clock)
+            3 -> CardContent("Material X Custom Dialog", R.drawable.dialog)
+        }
+    }
+}
+
+@Composable
+fun CardContent(title: String, iconResId: Int) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(id = iconResId),
+            contentDescription = title,
+            modifier = Modifier.size(50.dp),
+            contentScale = ContentScale.Fit
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = title,
+            fontSize = 12.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black
+        )
+    }
+}
+
+// Function to resolve collisions and adjust velocities
+private fun resolveCollisionsAndAdjustVelocities(
+    positions: List<PointF>,
+    velocities: List<PointF>,
+    screenWidth: Float,
+    screenHeight: Float
+): Pair<List<PointF>, List<PointF>> {
+    val resolvedPositions = positions.toMutableList()
+    val resolvedVelocities = velocities.toMutableList()
+
+    for (i in positions.indices) {
+        for (j in i + 1 until positions.size) {
+            val posA = resolvedPositions[i]
+            val posB = resolvedPositions[j]
+            val velocityA = resolvedVelocities[i]
+            val velocityB = resolvedVelocities[j]
+
+            // Calculate distance between components
+            val distance = sqrt((posA.x - posB.x).pow(2) + (posA.y - posB.y).pow(2))
+
+            // If components collide (distance < size), adjust positions and velocities
+            if (distance < 100f) { // Assuming 100f is the size of the components
+                val overlap = 100f - distance
+                val directionX = (posB.x - posA.x) / distance
+                val directionY = (posB.y - posA.y) / distance
+
+                // Move components in opposite directions based on the overlap
+                resolvedPositions[i] = PointF(
+                    posA.x - overlap * directionX / 2,
+                    posA.y - overlap * directionY / 2
+                ).coerceInBounds(screenWidth, screenHeight)
+
+                resolvedPositions[j] = PointF(
+                    posB.x + overlap * directionX / 2,
+                    posB.y + overlap * directionY / 2
+                ).coerceInBounds(screenWidth, screenHeight)
+
+                // Adjust velocities to move in opposite directions after collision
+                val newVelocityA = PointF(velocityA.x - directionX * 0.1f, velocityA.y - directionY * 0.1f)
+                val newVelocityB = PointF(velocityB.x + directionX * 0.1f, velocityB.y + directionY * 0.1f)
+
+                resolvedVelocities[i] = newVelocityA
+                resolvedVelocities[j] = newVelocityB
+            }
+        }
+    }
+
+    return Pair(resolvedPositions, resolvedVelocities)
+}
+
+// Extension function to keep positions within screen bounds
+private fun PointF.coerceInBounds(screenWidth: Float, screenHeight: Float): PointF {
+    val xBounded = this.x.coerceIn(0f, screenWidth - 100f)
+    val yBounded = this.y.coerceIn(0f, screenHeight - 100f)
+    return PointF(xBounded, yBounded)
+}*/
