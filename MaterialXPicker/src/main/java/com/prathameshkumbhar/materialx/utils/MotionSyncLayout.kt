@@ -16,16 +16,6 @@ package com.prathameshkumbhar.materialx.utils
  * limitations under the License.
  */
 
-import android.graphics.PointF
-import androidx.compose.runtime.Composable
-
-data class MaterialXMotionSyncAsset(
-    val id: String,
-    val title: String,
-    val iconResId: Int? = null,
-    val customContent: (@Composable () -> Unit)? = null,
-    val contentType: MaterialXMotionSyncContentType = MaterialXMotionSyncContentType.IMAGE,
-    val initialPosition: PointF = PointF(0f, 0f),
-    val size: Float = 100f
-
-)
+enum class MotionSyncLayout{
+    ROW, COLUMN
+}

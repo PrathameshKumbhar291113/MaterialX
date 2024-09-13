@@ -16,8 +16,6 @@ package com.prathameshkumbhar.materialx.utils
  * limitations under the License.
  */
 
-enum class MaterialXMotionSyncContentType {
-    IMAGE,
-    TEXT,
-    CUSTOM
+enum class MotionSyncAlignment {
+    TOP, BOTTOM, LEFT, RIGHT, CENTER
 }
