@@ -14,6 +14,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.prathameshkumbhar.materialx.databinding.ActivityJpcBinding
+import com.prathameshkumbhar.materialx.date_picker.MaterialXJPCDatePicker
 import com.prathameshkumbhar.materialx.ui.theme.MaterialXJPCTheme
 
 
@@ -41,7 +42,7 @@ class JPCActivity() : ComponentActivity() {
 @Composable
 fun MaterialXJPCDatePickerExample() {
     val lifeCycleOwner = LocalLifecycleOwner.current
-        val context = LocalContext.current
+    val context = LocalContext.current
 
     MaterialXJPCDatePicker(
         lifecycleOwner = lifeCycleOwner,

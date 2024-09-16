@@ -1,4 +1,4 @@
-package com.prathameshkumbhar.materialx
+package com.prathameshkumbhar.materialx.time_picker
 
 /*
  * Copyright 2024 Prathamesh Kumbhar

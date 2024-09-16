@@ -1,4 +1,4 @@
-package com.prathameshkumbhar.materialx
+package com.prathameshkumbhar.materialx.time_picker
 
 import android.widget.FrameLayout
 import androidx.compose.runtime.Composable
