@@ -1,4 +1,4 @@
-package com.prathameshkumbhar.materialx
+package com.prathameshkumbhar.materialx.date_picker
 
 /*
  * Copyright 2024 Prathamesh Kumbhar
@@ -16,20 +16,19 @@ package com.prathameshkumbhar.materialx
  * limitations under the License.
  */
 
-import androidx.core.util.Pair
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.datepicker.MaterialDatePicker
 
-class MaterialXDateRangePicker {
+class MaterialXDatePicker{
 
-    fun showMaterialXDateRangePicker(
+    fun showMaterialXDatePicker(
         lifecycleOwner: LifecycleOwner,
         isCancelable: Boolean,
-        onDateRangeSelected: (Pair<Long, Long>) -> Unit,
+        onDateSelected: (Long) -> Unit,
         onError: (String) -> Unit = {},
-        customizations: (MaterialDatePicker.Builder<Pair<Long, Long>>) -> Unit = {}
+        customizations: (MaterialDatePicker.Builder<Long>) -> Unit = {}
     ) {
         try {
             val fragmentManager = when (lifecycleOwner) {
@@ -38,18 +37,16 @@ class MaterialXDateRangePicker {
                 else -> throw IllegalArgumentException("Invalid LifecycleOwner")
             }
 
-            val builder = MaterialDatePicker.Builder.dateRangePicker()
+            val builder = MaterialDatePicker.Builder.datePicker()
             customizations(builder)
             val picker = builder.build()
             picker.isCancelable = isCancelable
 
             picker.addOnPositiveButtonClickListener { selection ->
-                if (selection?.first == null || selection.second == null) {
-                    onError("Date range selection is null.")
-                } else if (selection.first > selection.second) {
-                    onError("Invalid date range: start date is after end date.")
+                if (selection == null) {
+                    onError("Date selection is null.")
                 } else {
-                    onDateRangeSelected(Pair(selection.first, selection.second))
+                    onDateSelected(selection)
                 }
             }
 
@@ -63,4 +60,5 @@ class MaterialXDateRangePicker {
             onError("An unexpected error occurred: ${e.localizedMessage}")
         }
     }
+
 }

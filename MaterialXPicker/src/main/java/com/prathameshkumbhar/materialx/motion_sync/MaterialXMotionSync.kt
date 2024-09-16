@@ -1,4 +1,4 @@
-package com.prathameshkumbhar.materialx
+package com.prathameshkumbhar.materialx.motion_sync
 
 /*
  * Copyright 2024 Prathamesh Kumbhar
@@ -35,12 +35,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.prathameshkumbhar.materialx.utils.MotionSyncAlignment
-import com.prathameshkumbhar.materialx.utils.MotionSyncLayout
-import com.prathameshkumbhar.materialx.utils.MotionSyncSensorHandler
-import com.prathameshkumbhar.materialx.utils.motionSyncResolveCollisionsAndAdjustVelocities
-import com.prathameshkumbhar.materialx.utils.motionSyncSetupInitialComponentPositions
-import com.prathameshkumbhar.materialx.utils.toPx
+import com.prathameshkumbhar.materialx.motion_sync.utils.MotionSyncAlignment
+import com.prathameshkumbhar.materialx.motion_sync.utils.MotionSyncLayout
+import com.prathameshkumbhar.materialx.motion_sync.utils.MotionSyncSensorHandler
+import com.prathameshkumbhar.materialx.motion_sync.utils.motionSyncResolveCollisionsAndAdjustVelocities
+import com.prathameshkumbhar.materialx.motion_sync.utils.motionSyncSetupInitialComponentPositions
+import com.prathameshkumbhar.materialx.motion_sync.utils.toPx
 
 @Composable
 fun MaterialXMotionSync(

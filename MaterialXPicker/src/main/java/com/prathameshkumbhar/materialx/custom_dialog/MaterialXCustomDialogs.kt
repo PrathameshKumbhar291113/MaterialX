@@ -1,4 +1,4 @@
-package com.prathameshkumbhar.materialx
+package com.prathameshkumbhar.materialx.custom_dialog
 
 /*
  * Copyright 2024 Prathamesh Kumbhar

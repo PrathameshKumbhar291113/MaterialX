@@ -1,4 +1,4 @@
-package com.prathameshkumbhar.materialx.utils
+package com.prathameshkumbhar.materialx.motion_sync.utils
 
 /*
  * Copyright 2024 Prathamesh Kumbhar

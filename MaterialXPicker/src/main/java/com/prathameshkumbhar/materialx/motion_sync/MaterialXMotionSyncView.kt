@@ -1,4 +1,4 @@
-package com.prathameshkumbhar.materialx
+package com.prathameshkumbhar.materialx.motion_sync
 
 import android.content.Context
 import android.graphics.Canvas
@@ -7,7 +7,7 @@ import android.graphics.PointF
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.ViewGroup
-import com.prathameshkumbhar.materialx.utils.MotionSyncSensorHandler
+import com.prathameshkumbhar.materialx.motion_sync.utils.MotionSyncSensorHandler
 
 
 class MotionSyncView @JvmOverloads constructor(
