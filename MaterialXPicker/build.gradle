@@ -76,4 +76,7 @@ dependencies {
     implementation libs.compose.material3
     implementation libs.compose.compiler
 
+    implementation(libs.coil.compose)
+
+
 }

@@ -21,7 +21,11 @@ import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.view.isVisible
+import com.prathameshkumbhar.materialx.custom_dialog.MaterialXCustomDialogs.MaterialXCustomDialogBuilder.Companion.MATCH_PARENT
+import com.prathameshkumbhar.materialx.custom_dialog.MaterialXCustomDialogs.MaterialXCustomDialogBuilder.Companion.WRAP_CONTENT
 import com.prathameshkumbhar.materialxpicker.databinding.MaterialXCustomDialogBoxBinding
 
 class MaterialXCustomDialogs private constructor(
@@ -53,11 +57,30 @@ class MaterialXCustomDialogs private constructor(
             builder.paddingBottom ?: binding.dialogContainer.paddingBottom
         )
 
-        // Set image
+        // Set image with dynamic size and scale
         builder.imageDrawable?.let {
             binding.ivImage.apply {
                 setImageDrawable(it)
                 isVisible = true
+
+                // Apply dynamic width and height (support for 0dp)
+                val layoutParams = this.layoutParams
+                layoutParams.width = if (builder.imageWidth == 0) 0 else when (builder.imageWidth) {
+                    WRAP_CONTENT -> ViewGroup.LayoutParams.WRAP_CONTENT
+                    MATCH_PARENT -> ViewGroup.LayoutParams.MATCH_PARENT
+                    else -> builder.imageWidth
+                }
+                layoutParams.height = if (builder.imageHeight == 0) 0 else when (builder.imageHeight) {
+                    WRAP_CONTENT -> ViewGroup.LayoutParams.WRAP_CONTENT
+                    MATCH_PARENT -> ViewGroup.LayoutParams.MATCH_PARENT
+                    else -> builder.imageHeight
+                }
+                this.layoutParams = layoutParams
+
+                // Apply scale type if specified
+                builder.imageScaleType?.let { scaleType ->
+                    this.scaleType = scaleType
+                }
             }
         } ?: run {
             binding.ivImage.isVisible = false
@@ -107,6 +130,9 @@ class MaterialXCustomDialogs private constructor(
         var backgroundDrawable: Drawable? = null
         var backgroundColor: Int? = null
         var imageDrawable: Drawable? = null
+        var imageWidth: Int = WRAP_CONTENT // Default to wrap content
+        var imageHeight: Int = WRAP_CONTENT // Default to wrap content
+        var imageScaleType: ImageView.ScaleType? = null
         var title: String? = null
         var description: String? = null
         var positiveButtonText: String? = null
@@ -126,9 +152,21 @@ class MaterialXCustomDialogs private constructor(
         var onPositiveClick: (() -> Unit)? = null
         var onNegativeClick: (() -> Unit)? = null
 
+        // Constants for wrap content, match parent, and 0dp
+        companion object {
+            const val WRAP_CONTENT = ViewGroup.LayoutParams.WRAP_CONTENT
+            const val MATCH_PARENT = ViewGroup.LayoutParams.MATCH_PARENT
+        }
+
+        // Builder functions for customization
         fun setBackgroundColor(color: Int) = apply { this.backgroundColor = color }
         fun setBackgroundDrawable(drawable: Drawable) = apply { this.backgroundDrawable = drawable }
         fun setImageDrawable(drawable: Drawable) = apply { this.imageDrawable = drawable }
+        fun setImageSize(width: Int, height: Int) = apply {
+            this.imageWidth = width
+            this.imageHeight = height
+        }
+        fun setImageScaleType(scaleType: ImageView.ScaleType) = apply { this.imageScaleType = scaleType }
         fun setTitle(title: String) = apply { this.title = title }
         fun setDescription(description: String) = apply { this.description = description }
         fun setPositiveButton(text: String, onClick: (() -> Unit)? = null) =
@@ -151,6 +189,5 @@ class MaterialXCustomDialogs private constructor(
         }
 
         fun build(): MaterialXCustomDialogs = MaterialXCustomDialogs(this)
-
     }
 }
