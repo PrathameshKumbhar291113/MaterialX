@@ -55,8 +55,8 @@ dependencies {
     androidTestImplementation libs.androidx.espresso.core
 
     //Including material x library
-//    implementation libs.materialx
-    implementation project(":MaterialXPicker")
+    implementation libs.materialx
+//    implementation project(":MaterialXPicker")
 
     implementation platform(libs.compose.bom)
     implementation libs.compose.ui
