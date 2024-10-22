@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
+import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 
 class MaterialXDatePicker {
@@ -30,7 +31,8 @@ class MaterialXDatePicker {
         isCancelable: Boolean,
         onDateSelected: (Long) -> Unit,
         onError: (String) -> Unit = {},
-        restrictFutureDates: Boolean = false,
+        restrictFutureDates: Boolean,
+        restrictPastDates: Boolean,
         customizations: (MaterialDatePicker.Builder<Long>) -> Unit = {}
     ) {
         try {
@@ -45,6 +47,13 @@ class MaterialXDatePicker {
             if (restrictFutureDates) {
                 val constraintsBuilder = CalendarConstraints.Builder()
                 constraintsBuilder.setValidator(DateValidatorPointBackward.now())
+
+                builder.setCalendarConstraints(constraintsBuilder.build())
+            }
+
+            if (restrictPastDates) {
+                val constraintsBuilder = CalendarConstraints.Builder()
+                constraintsBuilder.setValidator(DateValidatorPointForward.now())
 
                 builder.setCalendarConstraints(constraintsBuilder.build())
             }

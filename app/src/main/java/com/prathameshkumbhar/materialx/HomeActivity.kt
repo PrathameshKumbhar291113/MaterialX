@@ -66,7 +66,8 @@ class HomeActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 },
-                restrictFutureDates = true,
+                restrictFutureDates = false,
+                restrictPastDates = true,
                 customizations = { customization ->
                     customization.setTheme(R.style.ThemeMaterialCalendar)
                 }

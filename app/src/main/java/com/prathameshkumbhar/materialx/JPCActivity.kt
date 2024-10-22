@@ -62,6 +62,8 @@ fun MaterialXJPCDatePickerExample() {
                 Toast.LENGTH_SHORT
             ).show()
         },
+        restrictFutureDates = false,
+        restrictPastDates = true,
         customizations = { customization ->
             customization.setTheme(R.style.ThemeMaterialCalendar)
         }
