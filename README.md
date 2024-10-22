@@ -3,7 +3,7 @@
 # Material X
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Version](https://img.shields.io/badge/version-1.0.4-green.svg)](https://github.com/PrathameshKumbhar291113/MaterialX/releases)
+[![Version](https://img.shields.io/badge/version-1.0.5-green.svg)](https://github.com/PrathameshKumbhar291113/MaterialX/releases)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://jitpack.io/#PrathameshKumbhar291113/MaterialX)
 
 **Material X** is an Android library that simplifies the creation of customizable Material Design components, such as dialog boxes, time pickers, date pickers, and date range pickers. The library is designed to be highly flexible, allowing you to tailor its components to fit the specific needs of your application.
@@ -52,7 +52,7 @@ Material X is available via [JitPack](https://jitpack.io/). To include it in you
 
     ```groovy
     dependencies {
-        implementation 'com.github.PrathameshKumbhar291113:MaterialX:1.0.4'
+        implementation 'com.github.PrathameshKumbhar291113:MaterialX:1.0.5'
     }
     ```
 
