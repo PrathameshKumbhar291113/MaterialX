@@ -27,6 +27,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
 
 @Composable
@@ -54,11 +55,10 @@ fun MaterialXJPCDatePicker(
         val builder = MaterialDatePicker.Builder.datePicker()
 
         if (restrictFutureDates) {
-            builder.setCalendarConstraints(
-                CalendarConstraints.Builder()
-                    .setEnd(MaterialDatePicker.todayInUtcMilliseconds())
-                    .build()
-            )
+            val constraintsBuilder = CalendarConstraints.Builder()
+            constraintsBuilder.setValidator(DateValidatorPointBackward.now())
+
+            builder.setCalendarConstraints(constraintsBuilder.build())
         }
 
         customizations(builder)
