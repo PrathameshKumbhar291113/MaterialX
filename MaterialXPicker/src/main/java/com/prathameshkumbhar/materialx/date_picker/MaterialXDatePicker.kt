@@ -19,6 +19,7 @@ package com.prathameshkumbhar.materialx.date_picker
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
+import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 
 class MaterialXDatePicker{
@@ -28,6 +29,7 @@ class MaterialXDatePicker{
         isCancelable: Boolean,
         onDateSelected: (Long) -> Unit,
         onError: (String) -> Unit = {},
+        restrictFutureDates: Boolean = false,
         customizations: (MaterialDatePicker.Builder<Long>) -> Unit = {}
     ) {
         try {
@@ -38,6 +40,15 @@ class MaterialXDatePicker{
             }
 
             val builder = MaterialDatePicker.Builder.datePicker()
+
+            if (restrictFutureDates) {
+                builder.setCalendarConstraints(
+                    CalendarConstraints.Builder()
+                        .setEnd(MaterialDatePicker.todayInUtcMilliseconds())
+                        .build()
+                )
+            }
+
             customizations(builder)
             val picker = builder.build()
             picker.isCancelable = isCancelable

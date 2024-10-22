@@ -23,10 +23,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.window.Dialog
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
+import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 
 @Composable
@@ -35,10 +35,10 @@ fun MaterialXJPCDatePicker(
     isCancelable: Boolean = true,
     onDateSelected: (Long) -> Unit,
     onError: (String) -> Unit = {},
+    restrictFutureDates: Boolean = false,
     customizations: (MaterialDatePicker.Builder<Long>) -> Unit = {}
 ) {
 
-    val context = LocalContext.current
     val fragmentManager = when (lifecycleOwner) {
         is FragmentActivity -> lifecycleOwner.supportFragmentManager
         else -> throw IllegalArgumentException("Invalid LifecycleOwner")
@@ -52,9 +52,17 @@ fun MaterialXJPCDatePicker(
 
     if (showDialog) {
         val builder = MaterialDatePicker.Builder.datePicker()
+
+        if (restrictFutureDates) {
+            builder.setCalendarConstraints(
+                CalendarConstraints.Builder()
+                    .setEnd(MaterialDatePicker.todayInUtcMilliseconds())
+                    .build()
+            )
+        }
+
         customizations(builder)
         val picker = builder.build()
-
 
         Dialog(onDismissRequest = { showDialog = false }) {
             picker.isCancelable = isCancelable
