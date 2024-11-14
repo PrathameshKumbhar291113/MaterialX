@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.Dp
 import kotlin.math.pow
 import kotlin.math.sqrt
 
+/*
 fun motionSyncSetupInitialComponentPositions(
     count: Int,
     layoutDirection: MotionSyncLayout,
@@ -154,85 +155,9 @@ private fun PointF.coerceInBounds(screenWidth: Float, screenHeight: Float, sizeP
 fun Dp.toPx(density: Float): Float {
     return this.value * density
 }
+*/
 
-
-fun motionSyncSetupInitialComponentPositions(
-    count: Int,
-    layoutDirection: MotionSyncLayout,
-    alignmentOption: MotionSyncAlignment,
-    sizePx: Float,
-    spacingPx: Float,
-    screenWidthPx: Float,
-    screenHeightPx: Float
-): List<PointF> {
-    val positions = mutableListOf<PointF>()
-
-    when (layoutDirection) {
-        MotionSyncLayout.ROW -> {
-            val itemsPerRow = (screenWidthPx / (sizePx + spacingPx)).toInt()
-            val numberOfRows = (count + itemsPerRow - 1) / itemsPerRow
-
-            val totalWidth = (sizePx + spacingPx) * itemsPerRow - spacingPx
-            val startX = when (alignmentOption) {
-                MotionSyncAlignment.LEFT -> 0f
-                MotionSyncAlignment.CENTER -> (screenWidthPx - totalWidth) / 2
-                MotionSyncAlignment.RIGHT -> screenWidthPx - totalWidth
-                else -> 0f
-            }
-            val startY = when (alignmentOption) {
-                MotionSyncAlignment.TOP ->
-                    0f
-
-                MotionSyncAlignment.CENTER ->
-                    (screenHeightPx - (sizePx + spacingPx) * numberOfRows) / 2
-
-                MotionSyncAlignment.BOTTOM ->
-                    screenHeightPx - (sizePx + spacingPx) * numberOfRows
-
-                else -> 0f
-            }
-
-            for (i in 0 until count) {
-                val row = i / itemsPerRow
-                val column = i % itemsPerRow
-                val x = startX + column * (sizePx + spacingPx)
-                val y = startY + row * (sizePx + spacingPx)
-                positions.add(PointF(x, y))
-            }
-        }
-
-        MotionSyncLayout.COLUMN -> {
-            val itemsPerColumn = (screenHeightPx / (sizePx + spacingPx)).toInt()
-            val numberOfColumns = (count + itemsPerColumn - 1) / itemsPerColumn
-
-            val totalHeight = (sizePx + spacingPx) * itemsPerColumn - spacingPx
-            val startY = when (alignmentOption) {
-                MotionSyncAlignment.TOP -> 0f
-                MotionSyncAlignment.CENTER -> (screenHeightPx - totalHeight) / 2
-                MotionSyncAlignment.BOTTOM -> screenHeightPx - totalHeight
-                else -> 0f
-            }
-            val startX = when (alignmentOption) {
-                MotionSyncAlignment.LEFT -> 0f
-                MotionSyncAlignment.CENTER -> (screenWidthPx - (sizePx + spacingPx) * numberOfColumns) / 2
-                MotionSyncAlignment.RIGHT -> screenWidthPx - (sizePx + spacingPx) * numberOfColumns
-                else -> 0f
-            }
-
-            for (i in 0 until count) {
-                val column = i / itemsPerColumn
-                val row = i % itemsPerColumn
-                val x = startX + column * (sizePx + spacingPx)
-                val y = startY + row * (sizePx + spacingPx)
-                positions.add(PointF(x, y))
-            }
-        }
-    }
-
-    return positions
-}
-
-/*fun motionSyncResolveCollisionsAndAdjustVelocities(
+fun motionSyncResolveCollisionsAndAdjustVelocities(
     positions: List<PointF>,
     velocities: List<PointF>,
     screenWidth: Float,
@@ -256,20 +181,84 @@ fun motionSyncSetupInitialComponentPositions(
                 val directionX = (posB.x - posA.x) / distance
                 val directionY = (posB.y - posA.y) / distance
 
-                resolvedPositions[i] = PointF(posA.x - directionX * overlap / 2, posA.y - directionY * overlap / 2)
-                resolvedPositions[j] = PointF(posB.x + directionX * overlap / 2, posB.y + directionY * overlap / 2)
+                resolvedPositions[i] = PointF(
+                    posA.x - overlap * directionX / 2,
+                    posA.y - overlap * directionY / 2
+                ).coerceInBounds(screenWidth, screenHeight, sizePx)
 
-                val newVelAX = velocityA.x + directionX * 0.5f
-                val newVelAY = velocityA.y + directionY * 0.5f
-                val newVelBX = velocityB.x - directionX * 0.5f
-                val newVelBY = velocityB.y - directionY * 0.5f
+                resolvedPositions[j] = PointF(
+                    posB.x + overlap * directionX / 2,
+                    posB.y + overlap * directionY / 2
+                ).coerceInBounds(screenWidth, screenHeight, sizePx)
 
-                resolvedVelocities[i] = PointF(newVelAX, newVelAY)
-                resolvedVelocities[j] = PointF(newVelBX, newVelBY)
+                resolvedVelocities[i] = PointF(
+                    (velocityA.x - directionX * 0.1f).coerceIn(-5f, 5f),
+                    (velocityA.y - directionY * 0.1f).coerceIn(-5f, 5f)
+                )
+
+                resolvedVelocities[j] = PointF(
+                    (velocityB.x + directionX * 0.1f).coerceIn(-5f, 5f),
+                    (velocityB.y + directionY * 0.1f).coerceIn(-5f, 5f)
+                )
             }
         }
     }
 
     return Pair(resolvedPositions, resolvedVelocities)
-}*/
+}
+
+private fun PointF.coerceInBounds(screenWidth: Float, screenHeight: Float, sizePx: Float): PointF {
+    val xBounded = this.x.coerceIn(0f, screenWidth - sizePx)
+    val yBounded = this.y.coerceIn(0f, screenHeight - sizePx)
+    return PointF(xBounded, yBounded)
+}
+
+fun motionSyncSetupInitialComponentPositions(
+    count: Int,
+    layoutDirection: MotionSyncLayout,
+    alignmentOption: MotionSyncAlignment,
+    size: Dp,
+    spacing: Dp,
+    screenWidthPx: Float,
+    screenHeightPx: Float,
+    density: Float
+): List<PointF> {
+    val sizePx = size.toPx(density)
+    val spacingPx = spacing.toPx(density)
+    val positions = mutableListOf<PointF>()
+
+    when (layoutDirection) {
+        MotionSyncLayout.COLUMN -> {
+            val totalHeight = (sizePx + spacingPx) * count - spacingPx
+            val startX = when (alignmentOption) {
+                MotionSyncAlignment.LEFT -> 0f
+                MotionSyncAlignment.CENTER -> (screenWidthPx - sizePx) / 2
+                MotionSyncAlignment.RIGHT -> screenWidthPx - sizePx
+                else -> 0f
+            }
+            val startY = when (alignmentOption) {
+                MotionSyncAlignment.TOP -> 0f
+                MotionSyncAlignment.CENTER -> (screenHeightPx - totalHeight) / 2
+                MotionSyncAlignment.BOTTOM -> screenHeightPx - totalHeight
+                else -> 0f
+            }
+
+            for (i in 0 until count) {
+                val x = startX
+                val y = startY + i * (sizePx + spacingPx)
+                positions.add(PointF(x, y))
+            }
+        }
+
+        else -> {
+            // Handle ROW or other layouts if needed
+        }
+    }
+
+    return positions
+}
+
+fun Dp.toPx(density: Float): Float {
+    return this.value * density
+}
 

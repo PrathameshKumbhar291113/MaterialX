@@ -39,7 +39,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun gotoComposeActivity() {
-       binding.cardComposeBox.setOnClickListener {
+       binding.cardMotionSync.setOnClickListener {
            val intent = Intent(this, JPCActivity::class.java)
            startActivity(intent)
        }

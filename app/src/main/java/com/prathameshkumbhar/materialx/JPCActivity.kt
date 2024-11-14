@@ -2,19 +2,22 @@ package com.prathameshkumbhar.materialx
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.unit.dp
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.prathameshkumbhar.materialx.databinding.ActivityJpcBinding
-import com.prathameshkumbhar.materialx.date_picker.MaterialXJPCDatePicker
+import com.prathameshkumbhar.materialx.motion_sync.MaterialXMotionSync
+import com.prathameshkumbhar.materialx.motion_sync.utils.MotionSyncAlignment
+import com.prathameshkumbhar.materialx.motion_sync.utils.MotionSyncLayout
 import com.prathameshkumbhar.materialx.ui.theme.MaterialXJPCTheme
 
 
@@ -31,7 +34,7 @@ class JPCActivity() : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.onBackground
                 ) {
-
+                    MaterialXMotionSyncExample()
                 }
             }
         }
@@ -40,33 +43,39 @@ class JPCActivity() : ComponentActivity() {
 
 
 @Composable
-fun MaterialXJPCDatePickerExample() {
-    val lifeCycleOwner = LocalLifecycleOwner.current
-    val context = LocalContext.current
+fun MaterialXMotionSyncExample() {
 
-    MaterialXJPCDatePicker(
-        lifecycleOwner = lifeCycleOwner,
-        isCancelable = true,
-        onDateSelected = { selectedDate ->
-            // Handle the selected date
-            Log.d("DatePicker", "Selected date: $selectedDate")
-            Toast.makeText(
-                context,
-                "Date Selected: $selectedDate",
-                Toast.LENGTH_SHORT
-            ).show()
+    val shapesList: List<@Composable () -> Unit> = listOf(
+        {
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .background(colorResource(id = R.color.heliotrope1))
+            )
         },
-        onError = { error ->
-            Toast.makeText(context,
-                "Error Occurred: $error",
-                Toast.LENGTH_SHORT
-            ).show()
+        {
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .background(colorResource(id = R.color.heliotrope2))
+            )
         },
-        restrictFutureDates = false,
-        restrictPastDates = true,
-        customizations = { customization ->
-            customization.setTheme(R.style.ThemeMaterialCalendar)
-        }
+        {
+            Box(
+                modifier = Modifier
+                    .size(80.dp)
+                    .background(colorResource(id = R.color.heliotrope1))
+            )
+        },
+    )
+
+    MaterialXMotionSync(
+        composableList = shapesList,
+        size = 80.dp,
+        layoutDirection = MotionSyncLayout.COLUMN,
+        alignmentOption = MotionSyncAlignment.CENTER,
+        spacing = 20.dp,
+        speedMultiplier = 1f
     )
 
 }

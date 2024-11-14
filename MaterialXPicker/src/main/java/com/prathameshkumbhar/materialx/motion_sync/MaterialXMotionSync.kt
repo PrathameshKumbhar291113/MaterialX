@@ -29,7 +29,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.withFrameMillis
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
@@ -127,7 +126,6 @@ fun MaterialXMotionSync(
                 modifier = Modifier
                     .offset(x = (pos.x / density).dp, y = (pos.y / density).dp)
                     .size(size)
-                    .align(Alignment.Center)
             ) {
                 composableList[index].invoke()
             }
